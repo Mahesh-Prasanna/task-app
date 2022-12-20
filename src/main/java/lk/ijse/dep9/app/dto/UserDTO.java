@@ -14,12 +14,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO implements Serializable {
-    @NotBlank
-    @Pattern(regexp = "^[A-Za-z ]+$")
+    @NotBlank(message = "Full name can't be empty or null")
+    @Pattern(regexp = "^[A-Za-z ]+$", message = "Invalid Name")
     private String fullName;
-    @NotBlank
+    @NotBlank(message = "username can't be empty")
     private String username;
     @NotEmpty
-    @Length(min = 3)
+    @Length(min = 3, message = "Password should be atleast 3 charactors")
     private String password;
 }
