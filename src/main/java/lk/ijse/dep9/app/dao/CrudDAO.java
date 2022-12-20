@@ -20,6 +20,5 @@ public interface CrudDAO<T extends SuperEntity, ID extends Serializable> extends
 
     long count();
 
-    boolean existById(ID pk);
-
+    boolean existsById(ID pk);
 }

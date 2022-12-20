@@ -1,23 +1,19 @@
 package lk.ijse.dep9.app.entity;
 
-import lombok.*;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Project implements SuperEntity{
+@AllArgsConstructor
+public class Project implements SuperEntity {
     private int id;
     private String name;
-    private User user;
-    private Set<Task> taskSet = new HashSet<>();
+    private String username;
 
-    public Project(String name, User user) {
+    public Project(String name, String username) {
         this.name = name;
-        this.user = user;
+        this.username = username;
     }
-
 }
