@@ -12,7 +12,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json")
     public void createUserAccount(@RequestBody UserDTO user){
-
+        System.out.println(user);
     }
     @PatchMapping("/me")
     public void updateUserAccountDetails(){
