@@ -1,5 +1,7 @@
 package lk.ijse.dep9.app.api;
 
+import lk.ijse.dep9.app.dto.UserDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -7,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class UserController {
 
-    @PostMapping
-    public void createUserAccount(){
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(consumes = "application/json")
+    public void createUserAccount(@RequestBody UserDTO user){
 
     }
     @PatchMapping("/me")
