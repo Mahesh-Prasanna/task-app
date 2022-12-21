@@ -15,11 +15,9 @@ import java.util.Optional;
 @Component
 public class TaskDAOImpl implements TaskDAO {
 
-
     private final JdbcTemplate jdbc;
 
-    public TaskDAOImpl(JdbcTemplate jdbc) {
-
+    public TaskDAOImpl( JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 
@@ -62,9 +60,9 @@ public class TaskDAOImpl implements TaskDAO {
     public List<Task> findAll() {
         return jdbc.query("SELECT * FROM Task", (rst, rowIndex) ->
                 new Task(rst.getInt("id"),
-                        rst.getString("content"),
-                        Task.Status.valueOf(rst.getString("status")),
-                        rst.getInt("project_id")));
+                rst.getString("content"),
+                Task.Status.valueOf(rst.getString("status")),
+                rst.getInt("project_id")));
     }
 
     @Override
@@ -81,8 +79,8 @@ public class TaskDAOImpl implements TaskDAO {
     public List<Task> findAllTasksByProjectId(Integer projectId) {
         return jdbc.query("SELECT * FROM Task WHERE project_id = ?", (rst, rowIndex) ->
                 new Task(rst.getInt("id"),
-                        rst.getString("content"),
-                        Task.Status.valueOf(rst.getString("status")),
-                        rst.getInt("project_id")), projectId);
+                rst.getString("content"),
+                Task.Status.valueOf(rst.getString("status")),
+                rst.getInt("project_id")), projectId);
     }
 }
