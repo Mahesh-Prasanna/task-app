@@ -18,11 +18,11 @@ import java.util.Optional;
 @Component
 public class UserDAOImpl implements UserDAO {
 
-    private final Connection connection;
+//    private final Connection connection;
     private final JdbcTemplate jdbc;
 
     public UserDAOImpl(Connection connection, JdbcTemplate jdbc) {
-        this.connection = connection;
+//        this.connection = connection;
         this.jdbc = jdbc;
     }
 
@@ -47,23 +47,19 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public Optional<User> findById(String username) {
         return jdbc.query("SELECT full_name, password FROM User WHERE username=?", rst -> {
-            return Optional.of(new User(username,
-                    rst.getString("password"),
-                    rst.getString("full_name")));
+                return Optional.of(new User(username,
+                        rst.getString("password"),
+                        rst.getString("full_name")));
         },username);
     }
 
     @Override
     public List<User> findAll() {
-        return jdbc.query("SELECT * FROM User", rst -> {
-            List<User> userList = new ArrayList<>();
-            while (rst.next()) {
-                userList.add(new User(rst.getString("username"),
+        return jdbc.query("SELECT * FROM User", (rst, rowNum) ->
+                new User(rst.getString("username"),
                         rst.getString("password"),
                         rst.getString("full_name")));
-            }
-            return userList;
-        });
+
     }
 
     @Override
