@@ -21,8 +21,9 @@ public class UserController {
         System.out.println(user);
 
     }
-    @PatchMapping("/me")
-    public void updateUserAccountDetails(){
+    @PatchMapping(value = "/me", consumes = "application/json")
+    public void updateUserAccountDetails(@Valid @RequestBody UserDTO user){
+        System.out.println(user);
 
     }
     @GetMapping
