@@ -8,33 +8,32 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/users")
-@CrossOrigin
 public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json")
-    public void createUserAccount(@Validated(ValidationGroups.Create.class) @RequestBody UserDTO user){
+    public void createUserAccount(@Validated(ValidationGroups.Create.class) @RequestBody UserDTO user) {
         System.out.println(user);
-
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping(value = "/me", consumes = "application/json")
-    public void updateUserAccountDetails(@Valid @RequestBody UserDTO user){
+    public void updateUserAccountDetails(@Valid @RequestBody UserDTO user) {
         System.out.println(user);
-
     }
+
     @GetMapping(value = "/me", produces = "application/json")
-    public UserDTO getUserAccountDetails(){
+    public UserDTO getUserAccountDetails() {
         System.out.println("getUserAccountDetails()");
         return new UserDTO();
     }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/me")
-    public void deleteUserAccount(){
+    public void deleteUserAccount() {
         System.out.println("deleteUserAccount()");
-
     }
-
-
 }

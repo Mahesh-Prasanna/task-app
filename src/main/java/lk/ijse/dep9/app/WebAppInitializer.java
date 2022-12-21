@@ -7,7 +7,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     public WebAppInitializer() {
-        log.debug("Spring is Starting...!");
+        log.debug("Spring is starting..!");
     }
 
     @Override
