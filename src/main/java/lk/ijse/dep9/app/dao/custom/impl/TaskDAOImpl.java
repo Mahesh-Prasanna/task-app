@@ -1,10 +1,7 @@
 package lk.ijse.dep9.app.dao.custom.impl;
 
 import lk.ijse.dep9.app.dao.custom.TaskDAO;
-import lk.ijse.dep9.app.dao.util.ConnectionUtil;
 import lk.ijse.dep9.app.entity.Task;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -20,7 +17,6 @@ public class TaskDAOImpl implements TaskDAO {
     public TaskDAOImpl(Connection connection) {
         this.connection = connection;
     }
-
 
     @Override
     public Task save(Task task) {
@@ -71,7 +67,7 @@ public class TaskDAOImpl implements TaskDAO {
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM Task WHERE id=?");
             stm.setInt(1, id);
             ResultSet rst = stm.executeQuery();
-            if (rst.next()){
+            if (rst.next()) {
                 return Optional.of(new Task(rst.getInt("id"),
                         rst.getString("content"),
                         Task.Status.valueOf(rst.getString("status")),
@@ -126,7 +122,7 @@ public class TaskDAOImpl implements TaskDAO {
                     prepareStatement("SELECT * FROM Task WHERE project_id = ?");
             stm.setInt(1, projectId);
             ResultSet rst = stm.executeQuery();
-            while (rst.next()){
+            while (rst.next()) {
                 taskList.add(new Task(rst.getInt("id"),
                         rst.getString("content"),
                         Task.Status.valueOf(rst.getString("status")),

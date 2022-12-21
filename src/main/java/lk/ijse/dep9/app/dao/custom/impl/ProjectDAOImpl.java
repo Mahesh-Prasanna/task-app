@@ -1,10 +1,7 @@
 package lk.ijse.dep9.app.dao.custom.impl;
 
 import lk.ijse.dep9.app.dao.custom.ProjectDAO;
-import lk.ijse.dep9.app.dao.util.ConnectionUtil;
 import lk.ijse.dep9.app.entity.Project;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -20,7 +17,6 @@ public class ProjectDAOImpl implements ProjectDAO {
     public ProjectDAOImpl(Connection connection) {
         this.connection = connection;
     }
-
 
     @Override
     public Project save(Project project) {
@@ -69,7 +65,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM Project WHERE id=?");
             stm.setInt(1, id);
             ResultSet rst = stm.executeQuery();
-            if (rst.next()){
+            if (rst.next()) {
                 return Optional.of(new Project(rst.getInt("id"),
                         rst.getString("name"),
                         rst.getString("username")));
@@ -123,7 +119,7 @@ public class ProjectDAOImpl implements ProjectDAO {
                     prepareStatement("SELECT * FROM Project WHERE username = ?");
             stm.setString(1, username);
             ResultSet rst = stm.executeQuery();
-            while (rst.next()){
+            while (rst.next()) {
                 projectList.add(new Project(rst.getInt("id"),
                         rst.getString("name"),
                         rst.getString("username")));

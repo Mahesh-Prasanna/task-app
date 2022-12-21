@@ -4,8 +4,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jndi.JndiObjectFactoryBean;
-import org.springframework.ui.ModelMap;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.naming.InitialContext;
@@ -15,6 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @Configuration
+@EnableTransactionManagement
 public class WebRootConfig {
 
     @Bean
@@ -25,10 +28,15 @@ public class WebRootConfig {
         return jndi;
     }
 
-    @Bean(destroyMethod = "close")
+    @Bean
     @RequestScope
-    public Connection connection(DataSource dataSource) throws SQLException {
-        return dataSource.getConnection();
+    public Connection connection(DataSource ds){
+        return DataSourceUtils.getConnection(ds);
+    }
+
+    @Bean
+    public DataSourceTransactionManager transactionManager(DataSource ds){
+        return new DataSourceTransactionManager(ds);
     }
 
     @Bean

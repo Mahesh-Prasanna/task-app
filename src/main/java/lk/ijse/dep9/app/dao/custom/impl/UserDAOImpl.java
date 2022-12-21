@@ -4,7 +4,6 @@ import lk.ijse.dep9.app.dao.custom.UserDAO;
 import lk.ijse.dep9.app.dao.util.ConnectionUtil;
 import lk.ijse.dep9.app.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -23,7 +22,6 @@ public class UserDAOImpl implements UserDAO {
     public UserDAOImpl(Connection connection) {
         this.connection = connection;
     }
-
 
     @Override
     public User save(User user) {
@@ -72,7 +70,7 @@ public class UserDAOImpl implements UserDAO {
                     prepareStatement("SELECT full_name, password FROM User WHERE username=?");
             stm.setString(1, username);
             ResultSet rst = stm.executeQuery();
-            if (rst.next()){
+            if (rst.next()) {
                 return Optional.of(new User(username,
                         rst.getString("password"),
                         rst.getString("full_name")));
@@ -89,7 +87,7 @@ public class UserDAOImpl implements UserDAO {
             List<User> userList = new ArrayList<>();
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM User");
             ResultSet rst = stm.executeQuery();
-            while (rst.next()){
+            while (rst.next()) {
                 userList.add(new User(rst.getString("username"),
                         rst.getString("password"),
                         rst.getString("full_name")));
