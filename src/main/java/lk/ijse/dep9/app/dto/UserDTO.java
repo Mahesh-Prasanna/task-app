@@ -25,4 +25,6 @@ public class UserDTO implements Serializable {
     @NotEmpty(message = "Password can't be empty or null")
     @Length(min = 3, message = "Password should be at least 3 characters long")
     private String password;
+
+
 }
