@@ -44,6 +44,5 @@ public class UserController {
     @DeleteMapping("/me")
     public void deleteUserAccount(@RequestAttribute String username) {
         userService.deleteUserAccount(username);
-
     }
 }

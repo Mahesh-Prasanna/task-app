@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
         this.transformer = transformer;
     }
 
-
     @Override
     public void createNewUserAccount(UserDTO userDTO) {
         userDTO.setPassword(DigestUtils.sha256Hex(userDTO.getPassword()));
@@ -69,6 +68,4 @@ public class UserServiceImpl implements UserService {
         }
         userDAO.deleteById(username);
     }
-
-
 }
